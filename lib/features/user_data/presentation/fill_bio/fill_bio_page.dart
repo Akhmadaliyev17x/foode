@@ -4,10 +4,22 @@ import 'package:go_router/go_router.dart';
 
 import '../../user_data.dart';
 
-class FillBioPage extends StatelessWidget {
+class FillBioPage extends StatefulWidget {
   static const url = "${SignUpPage.url}/bio";
 
   const FillBioPage({super.key});
+
+  @override
+  State<FillBioPage> createState() => _FillBioPageState();
+}
+
+class _FillBioPageState extends State<FillBioPage> {
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController nickNameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,28 +35,46 @@ class FillBioPage extends StatelessWidget {
               children: [
                 const SizedBox(height: 28),
                 const InputLabel(text: "Full Name"),
-                const CustomTextField(hintText: "Enter your name"),
+                CustomTextField(
+                  hintText: "Enter your name",
+                  controller: fullNameController,
+                ),
                 const SizedBox(height: 8),
                 const InputLabel(text: "Nick Name"),
-                const CustomTextField(hintText: "Create nickname"),
+                CustomTextField(
+                  hintText: "Create nickname",
+                  controller: nickNameController,
+                ),
                 const SizedBox(height: 8),
                 const InputLabel(text: "Phone number"),
-                const CustomTextField(hintText: "Enter your Phone Number"),
+                CustomTextField(
+                  hintText: "Enter your Phone Number",
+                  controller: phoneController,
+                ),
                 const SizedBox(height: 8),
                 const InputLabel(text: "Gender"),
-                const CustomDropdown(hintText: "Gender"),
+                CustomDropdown(
+                  hintText: "Gender",
+                  onChanged: (text) {
+                    genderController.text = text;
+                  },
+                ),
                 const SizedBox(height: 8),
                 const InputLabel(text: "Date of Birth"),
                 const CustomDatePickerField(hintText: "Pick your birthdate"),
                 const SizedBox(height: 8),
                 const InputLabel(text: "Address"),
-                const CustomTextField(hintText: "Enter your home address"),
+                CustomTextField(
+                  hintText: "Enter your home address",
+                  controller: addressController,
+                ),
                 const SizedBox(height: 20),
                 PrimaryButton(
-                    text: "Next",
-                    onPressed: () {
-                      context.go(PaymentMethodPage.url);
-                    }),
+                  text: "Next",
+                  onPressed: () {
+                    context.go(PaymentMethodPage.url);
+                  },
+                ),
               ],
             ),
           ),

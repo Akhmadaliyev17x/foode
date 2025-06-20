@@ -39,7 +39,9 @@ class ContactTile extends StatelessWidget {
               CircleAvatar(
                 backgroundColor: Colors.pink,
                 radius: 28,
-                backgroundImage: CachedNetworkImageProvider(user.imgUrl),
+                backgroundImage: CachedNetworkImageProvider(user
+                        .profileImageUrl ??
+                    "https://wallpapers.com/images/hd/placeholder-profile-icon-8qmjk1094ijhbem9.jpg"),
               ),
               if (user.isOnline)
                 Positioned(
@@ -63,7 +65,7 @@ class ContactTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  user.name,
+                  user.fullName,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -102,7 +104,7 @@ class ContactTile extends StatelessWidget {
                 const SizedBox(height: 24),
               const SizedBox(height: 8),
               Text(
-                timeFormat.format(user.lastOnline),
+                timeFormat.format(user.updatedAt),
                 style: TextStyle(
                   color: Colors.grey.shade500,
                   fontSize: 13,

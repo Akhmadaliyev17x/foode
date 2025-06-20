@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foode/config/router/router_libs.dart';
 import 'package:foode/domain/data.dart';
+import 'package:foode/domain/models/user_model.dart';
 import 'package:foode/features/profile/components/favorite_food_component.dart';
 
 import '../components/voucher_component.dart';
@@ -12,7 +13,23 @@ class ProfilePage extends StatelessWidget {
     super.key,
   });
 
-  static final user = MockData.users.first;
+  static final user = UserModel(
+    userId: "userId",
+    fullName: "Muhammad Axmadaliyev",
+    nickName: "akhmadaliyev",
+    email: "akhmadaliyev17x@gmail.com",
+    password: "12345678",
+    phoneNumber: "+998770147678",
+    dateOfBirth: DateTime(2005, 8, 19),
+    address: "Tashkent",
+    isVerified: true,
+    isOnline: true,
+    messages: ["messages"],
+    createdAt: DateTime(2020),
+    updatedAt: DateTime.now(),
+    profileImageUrl: "assets/images/png/pp_placeholder.jpg",
+  );
+
   static final favoriteItems = MockData.menus;
 
   @override
@@ -20,16 +37,14 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // User Image - Upper Half
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
             width: double.infinity,
-            child: Image.network(
-              user.imgUrl,
+            child: Image.asset(
+              user.profileImageUrl!,
               fit: BoxFit.cover,
             ),
           ),
-
           DraggableScrollableSheet(
             initialChildSize: 0.5,
             minChildSize: 0.5,
@@ -73,7 +88,7 @@ class ProfilePage extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            user.name,
+                            user.fullName,
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
