@@ -31,79 +31,81 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(28),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                height: 150,
-                child: AppIcons.splashIcon,
-              ),
-              Text(
-                "Sign up for free",
-                style: AppTextStyles.h2(color: AppColors.black),
-              ),
-              const SizedBox(height: 10),
-              const InputLabel(text: "Email"),
-              const CustomTextField(
-                hintText: "Email or Phone Number",
-              ),
-              const SizedBox(height: 12),
-              const ErrorMsg(message: "This is a message"),
-              const SizedBox(height: 20),
-              const InputLabel(text: "Password"),
-              const CustomTextField(hintText: "Password", isSecret: true),
-              const SizedBox(height: 8),
-              RememberMe(onChanged: (a) {
-                isAgree = a;
-                setState(() {});
-              }),
-              const SizedBox(height: 16),
-              PrimaryButton(
-                text: "Sign Up",
-                onPressed: () {
-                  context.go(FillBioPage.url);
-                },
-                isActive: isAgree,
-              ),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: null,
-                child: Text("Forgot the password?",
-                    style: AppTextStyles.h5(color: AppColors.pink)),
-              ),
-              const SizedBox(height: 8),
-              const Text("or continue with"),
-              const SizedBox(height: 8),
-              SizedBox(
-                width: 350,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AuthOptionButton(
-                        title: "Facebook", icon: AppIcons.facebook),
-                    AuthOptionButton(title: "Google", icon: AppIcons.google),
-                  ],
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: 150,
+                  child: AppIcons.splashIcon,
                 ),
-              ),
-              const SizedBox(height: 24),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("Already have an account?",
-                      style: AppTextStyles.h5(color: AppColors.black54)),
-                  TextButton(
-                    onPressed: () {
-                      context.go(SignInPage.url);
-                    },
-                    child: Text(
-                      "Sign In",
-                      style: AppTextStyles.h5(color: AppColors.pink),
-                    ),
+                Text(
+                  "Sign up for free",
+                  style: AppTextStyles.h2(color: AppColors.black),
+                ),
+                const SizedBox(height: 10),
+                const InputLabel(text: "Email"),
+                const CustomTextField(
+                  hintText: "Email or Phone Number",
+                ),
+                const SizedBox(height: 12),
+                const ErrorMsg(message: "This is a message"),
+                const SizedBox(height: 20),
+                const InputLabel(text: "Password"),
+                const CustomTextField(hintText: "Password", isSecret: true),
+                const SizedBox(height: 8),
+                RememberMe(onChanged: (a) {
+                  isAgree = a;
+                  setState(() {});
+                }),
+                const SizedBox(height: 16),
+                PrimaryButton(
+                  text: "Sign Up",
+                  onPressed: () {
+                    context.go(FillBioPage.url);
+                  },
+                  isActive: isAgree,
+                ),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: null,
+                  child: Text("Forgot the password?",
+                      style: AppTextStyles.h5(color: AppColors.pink)),
+                ),
+                const SizedBox(height: 8),
+                const Text("or continue with"),
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: 350,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AuthOptionButton(
+                          title: "Facebook", icon: AppIcons.facebook),
+                      AuthOptionButton(title: "Google", icon: AppIcons.google),
+                    ],
                   ),
-                ],
-              )
-            ],
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("Already have an account?",
+                        style: AppTextStyles.h5(color: AppColors.black54)),
+                    TextButton(
+                      onPressed: () {
+                        context.go(SignInPage.url);
+                      },
+                      child: Text(
+                        "Sign In",
+                        style: AppTextStyles.h5(color: AppColors.pink),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

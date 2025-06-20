@@ -19,7 +19,7 @@ class AuthOptionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size(160, 65),
+        fixedSize: const Size(150, 65),
         elevation: 8,
         shadowColor: AppColors.black12,
         backgroundColor: AppColors.white,

@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:foode/features/user_data/components/image_pick_component.dart';
 import 'package:foode/features/user_data/presentation/payment_method/payment_method_page.dart';
 import 'package:foode/features/user_data/user_data.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 
 class UploadPhotoPage extends StatefulWidget {
   static const String url = "${PaymentMethodPage.url}/upload-photo";
@@ -17,20 +14,23 @@ class UploadPhotoPage extends StatefulWidget {
 }
 
 class _UploadPhotoPageState extends State<UploadPhotoPage> {
-  int _index = 1;
-  File? _pickedImage;
+  int _index = 0;
+
+  /*
   final ImagePicker _picker = ImagePicker();
+  XFile? _imageFile;
+
 
   Future<void> _pickImage(ImageSource source) async {
-    final pickedFile =
-        await _picker.pickImage(source: source, imageQuality: 75);
-    if (pickedFile != null) {
+    final status = await Permission.photos.request();
+    if (status.isGranted) {
+      final pickedFile = await _picker.pickImage(source: source);
       setState(() {
-        _pickedImage = File(pickedFile.path);
-        _index = 1;
+        _imageFile = pickedFile;
       });
+    } else {
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +54,19 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
                       ImagePickComponent(
                         imgUrl: "assets/images/png/camera.png",
                         subtitle: "Take photo",
-                        onPressed: () => _pickImage(ImageSource.camera),
+                        onPressed: () {
+                          _index = 1;
+                          setState(() {});
+                        },
                       ),
                       const SizedBox(height: 10),
                       ImagePickComponent(
                         imgUrl: "assets/images/png/folder.png",
                         subtitle: "From gallery",
-                        onPressed: () => _pickImage(ImageSource.gallery),
+                        onPressed: () {
+                          _index = 1;
+                          setState(() {});
+                        },
                       ),
                     ],
                   ),
@@ -72,22 +78,17 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
                       child: Stack(
                         alignment: Alignment.bottomRight,
                         children: [
-                          CircleAvatar(
-                            minRadius: 100,
-                            backgroundColor: AppColors.pink,
-                            backgroundImage: _pickedImage != null
-                                ? FileImage(_pickedImage!)
-                                : const AssetImage(
-                                    "assets/images/png/pp_placeholder.jpg",
-                                  ) as ImageProvider,
-                          ),
+                          const CircleAvatar(
+                              minRadius: 100,
+                              backgroundColor: AppColors.pink,
+                              backgroundImage: AssetImage(
+                                "assets/images/png/pp_placeholder.jpg",
+                              )),
                           IconButton.filled(
                             style: IconButton.styleFrom(
                               backgroundColor: AppColors.pink,
                             ),
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
+                            onPressed: () {},
                             icon: const Icon(Icons.edit),
                           ),
                         ],
@@ -98,12 +99,10 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
               ),
             ),
             PrimaryButton(
-              isActive: _pickedImage != null,
+              isActive: _index != 0,
               text: "Next",
               onPressed: () {
-                if (_pickedImage != null) {
-                  context.go(SetLocationPage.url);
-                }
+                context.go(SetLocationPage.url);
               },
             ),
           ],
